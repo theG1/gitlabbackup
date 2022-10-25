@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: myweb-mysql02
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+        containers:
+        - image: docker.io/library/mysql
+          #imagePullPolicy: Never  #Do not use remote mirror
+          name: mysql
+          ports:
+          - containerPort: 3306
+          env:
+          - name: MYSQL_ROOT_PASSWORD
+            value: "password"
