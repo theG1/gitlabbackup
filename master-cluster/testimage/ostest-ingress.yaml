@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ostest-ingress
+  labels:
+    app: ostest-ingress
+  namespace: ingress-nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ostest-ingress
+  template:
+    metadata:
+      labels:
+        app: ostest-ingress
+    spec:
+      containers:
+      - name: ostest-ingress
+        image: harbor.io/test/ostest01:1.0
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ostest-svc
+  namespace: ingress-nginx
+spec:
+  selector:
+    app: ostest-ingress
+  type: ClusterIP 
+  ports:
+   -  port: 80
+      targetPort: 8080
+
