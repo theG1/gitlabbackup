@@ -1,0 +1,60 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-test
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/redirect-replacement: /$1
+#    nginx.ingress.kubernetes.io/redirect-regex: ^/(.*)
+    nginx.ingress.kubernetes.io/rewrite-target: /
+#    nginx.ingress.kubernetes.io/add-base-url: "true"
+#    nginx.ingress.kubernetes.io/configuration-snippet: try_files $uri $uri $uri/ $uri/index.html /index.html;
+#    nginx.ingress.kubernetes.io/app-root: "mario/index.html"
+  namespace: ingress-nginx
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+      - path: /mario
+        pathType: Prefix
+        backend:
+          service:
+            name: mario-default
+            port:
+              number: 80
+#  - http:
+#      paths:
+#      - path: /code
+#        pathType: Prefix
+#        backend:
+#          service:
+#            name: mario-default
+#            port:
+#              number: 80
+#  - http:
+#      paths:
+#      - path: /images
+#        pathType: Prefix
+#        backend:
+#          service:
+#            name: mario-default
+#            port:
+#              number: 80
+#  - http:
+#      paths:
+#      - path: /Enjine
+#        pathType: Prefix
+#        backend:
+#          service:
+#            name: mario-default
+#            port:
+#              number: 80
+      # - path: /tetris
+      #   pathType: Prefix
+      #   backend:
+          service:
+            name: tetris
+            port:
+              number: 80
+
