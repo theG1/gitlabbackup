@@ -1,0 +1,13 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: k8s-rwo-sc
+provisioner: csi.vsphere.vmware.com
+parameters:
+  storagepolicyname: "k8s Storage Policy"
+#리클레임 폴리시
+reclaimPolicy: Retain
+#  csi.storage.k8s.io/fstype: nfs4
+#  allowroot: "true"
+#  permission: "READ_WRITE"
+#  ips: "*"
