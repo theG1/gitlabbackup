@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tetris-mariofolder
+  labels:
+    app: tetris-mariofolder
+  namespace: mario
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tetris-mariofolder
+  template:
+    metadata:
+      labels:
+        app: tetris-mariofolder
+    spec:
+      containers:
+      - name: tetris-mariofolder
+        image: bsord/tetris
