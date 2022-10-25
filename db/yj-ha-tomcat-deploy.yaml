@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yj-ha-tomcat
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: yj-ha-tomcat
+  template:
+    metadata:
+      labels:
+        app: yj-ha-tomcat
+    spec:
+      containers:
+      - image: harbor.io/test/was:0.1
+        imagePullPolicy: Always
+        name: yj-ha-tomcat
+        resources:
+          limits:
+            cpu: "0.5"
+            memory: 1Gi
+        ports:
+        - containerPort: 8080
+        env:
+        - name: db_url
+          valueFrom:
+            secretKeyRef:
+              name: yj-ha-tomcat-secret
+              key: DB_URL
+        - name: db_user
+          valueFrom:
+            secretKeyRef:
+              name: yj-ha-tomcat-secret
+              key: DB_USER
+        - name: db_password
+          valueFrom:
+            secretKeyRef:
+              name: yj-ha-tomcat-secret
+              key: DB_PASSWORD
