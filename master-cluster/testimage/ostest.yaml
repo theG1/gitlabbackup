@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ostest
+  labels:
+    app: ostest
+  namespace: jy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ostest
+  template:
+    metadata:
+      labels:
+        app: ostest
+    spec:
+      containers:
+      - name: ostest
+        image: harbor.io/test/ostest01:1.0
+#        env:
+#        - name: REGISTRY_HTTP_TLS_CERTIFICATE
+#          value: /cert/tls.crt
+#        - name: REGISTRY_HTTP_TLS_KEY
+#          value: /cert/tls.key
+#      nodeSelector:
+#        nodegroup-type: "managed-frontend-workloads"
+      imagePullSecrets:
+      - name: cyj
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ostest
+  namespace: jy
+spec:
+  selector:
+    app: ostest
+  ports:
+  type: NodePort
+  ports:
+   -  port: 80
+      targetPort: 8080
+      nodePort: 30010
+
