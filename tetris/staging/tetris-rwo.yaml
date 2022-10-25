@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tetris-rwo-nfs
+  labels:
+    app: tetris
+spec:
+  replicas: 7
+  selector:
+    matchLabels:
+      app: tetris
+  template:
+    metadata:
+      labels:
+        app: tetris
+    spec:
+      containers:
+      - name: tetris
+        image: bsord/tetris
+        volumeMounts:
+        - name: rwopath
+          mountPath: /nfs/test
+      volumes:
+      - name: rwopath
+        persistentVolumeClaim:
+          claimName: test03-nfs-rwo-pvc
+      
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tetris-rwo-nfs
+spec:
+  externalTrafficPolicy: Cluster 
+  selector:
+    app: tetris
+  type: NodePort
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+    nodePort: 30111
