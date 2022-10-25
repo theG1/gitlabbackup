@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: myweb-tomcat
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myweb
+  template:
+    metadata:
+      labels:
+        app: myweb
+    spec:
+      containers:
+      - image: harbor.io/test/was:0.1
+        imagePullPolicy: Always
+        name: myweb
+        resources:
+          limits:
+            cpu: "0.5"
+            memory: 1Gi
+        ports:
+        - containerPort: 8080
+        env:
+        - name: db_url
+          valueFrom:
+            secretKeyRef:
+              name: tomcat-secret
+              key: DB_URL
+        - name: db_user
+          valueFrom:
+            secretKeyRef:
+              name: tomcat-secret
+              key: DB_USER
+        - name: db_password
+          valueFrom:
+            secretKeyRef:
+              name: tomcat-secret
+              key: DB_PASSWORD
+
