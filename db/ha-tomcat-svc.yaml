@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ha-myweb
+spec:
+  ports:
+  - name: ha-myweb-svc
+    port: 8080 #Port number of the Service
+    targetPort: 8080  #Port number of container exposed
+    nodePort: 30010  #The real port number of the node
+  selector:
+    app: ha-myweb   #Service selected pod with tag app: myweb
+  type: NodePort
+
