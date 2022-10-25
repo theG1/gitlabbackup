@@ -1,0 +1,9 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: youngjin-nfs-without-fileshare-sc
+provisioner: csi.vsphere.vmware.com
+parameters:
+  storagepolicyname: "youngjin policy"
+  csi.storage.k8s.io/fstype: nfs4
+
