@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: haproxy 
+  labels:
+    app: haproxy
+  namespace: ingress-nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: haproxy
+  template:
+    metadata:
+      labels:
+        app: haproxy
+    spec:
+      containers:
+      - name: haproxy
+        image: haproxy:lts-alpine 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: haproxy-svc 
+  namespace: ingress-nginx
+spec:
+  selector:
+    app: haproxy
+  ports:
+  type: NodePort
+  ports:
+   -  port: 80
+      targetPort: 8080
+      nodePort: 31777
