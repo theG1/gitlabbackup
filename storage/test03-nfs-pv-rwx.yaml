@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: test03-nfs-pv-rwx
+  labels:
+    nfs: test 
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Delete
+  nfs:
+    server: j1-sv01nfs01.dr-64-j1.hisr2.hiscloud 
+    path: /vsanfs/test03 
+
