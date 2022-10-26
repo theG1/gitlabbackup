@@ -8,11 +8,18 @@ Repository 설명서
 
 # 1. Repository 구조에 대하여
 ## 1.1. 각종 경로에  대하여
-	ArgoCD (bastion01)
-	ID : admin
-	PW : P@ssw0rd1234
-
+ArgoCD http://bastion01
+계정
+```
+admin
+```
+    
+비밀번호
+```  	
+P@ssw0rd1234
+```
 ## 1.2. 연계 프로그램  정보
+
 
 ## pv-master 클러스터 대시보드 
   1. 접속정보 :
