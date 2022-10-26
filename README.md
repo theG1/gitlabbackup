@@ -9,6 +9,8 @@ Repository 설명서
 # 1. Repository 구조에 대하여
 ## 1.1. 각종 경로에  대하여
 ArgoCD http://bastion01
+
+
 계정
 ```
 admin
