@@ -4,7 +4,7 @@ metadata:
   name: ostest
   labels:
     app: ostest
-  namespace: jy
+  namespace: ostest
 spec:
   replicas: 3
   selector:
@@ -32,7 +32,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: ostest
-  namespace: jy
+  namespace: ostest
 spec:
   selector:
     app: ostest
