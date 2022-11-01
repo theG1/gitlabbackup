@@ -4,9 +4,9 @@ metadata:
   name: ostest
   labels:
     app: ostest
-  namespace: jy
+  namespace: ostest
 spec:
-  replicas: 3
+  replicas: 5
   selector:
     matchLabels:
       app: ostest
@@ -32,7 +32,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: ostest
-  namespace: jy
+  namespace: ostest
 spec:
   selector:
     app: ostest
@@ -41,5 +41,5 @@ spec:
   ports:
    -  port: 80
       targetPort: 8080
-      nodePort: 30010
+    #  nodePort: 30010
 
