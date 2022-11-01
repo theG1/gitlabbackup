@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tetris-rwo-nfs
+  name: tetris-sc-test
   labels:
-    app: tetris
+    app: tetris-sc-test
 spec:
-  replicas: 7
+  replicas: 1
   selector:
     matchLabels:
-      app: tetris
+      app: tetris-sc-test
   template:
     metadata:
       labels:
-        app: tetris
+        app: tetris-sc-test
     spec:
       containers:
-      - name: tetris
+      - name: tetris-sc-test
         image: bsord/tetris
         volumeMounts:
         - name: rwopath
@@ -23,20 +23,19 @@ spec:
       volumes:
       - name: rwopath
         persistentVolumeClaim:
-          claimName: test03-nfs-rwo-pvc
+          claimName: elastic-sc2
       
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: tetris-rwo-nfs
+  name: tetris-sc-test
 spec:
   externalTrafficPolicy: Cluster 
   selector:
-    app: tetris
+    app: tetris-sc-test
   type: NodePort
   ports:
   - port: 80
     protocol: TCP
     targetPort: 80
-    nodePort: 30111
