@@ -14,7 +14,7 @@ spec:
       - path: /
         pathType: Prefix
         backend:
-          service: elasticsearch-master-headless
-            name: 
+          service: 
+            name: elasticsearch-master-headless
             port:
               number: 9200
