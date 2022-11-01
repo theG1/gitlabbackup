@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-A
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  namespace: ingress-nginx
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: "efk.com"
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service: elasticsearch-master-headless
+            name: 
+            port:
+              number: 9200
