@@ -6,7 +6,7 @@ metadata:
     app: mario-test
   namespace: mario
 spec:
-  replicas: 4
+  replicas: 8
   selector:
     matchLabels:
       app: mario-test
