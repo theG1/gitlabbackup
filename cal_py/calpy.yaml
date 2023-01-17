@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cal
+  labels:
+    app: cal
+  namespace: cal-py
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cal
+  template:
+    metadata:
+      labels:
+        app: cal
+    spec:
+      containers:
+      - name: cal
+        image: harbor.io/test/cal_py:1.0
+#        env:
+#        - name: REGISTRY_HTTP_TLS_CERTIFICATE
+#          value: /cert/tls.crt
+#        - name: REGISTRY_HTTP_TLS_KEY
+#          value: /cert/tls.key
+#      nodeSelector:
+#        nodegroup-type: "managed-frontend-workloads"
+#      imagePullSecrets:
+#      - name: cyj
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cal
+  namespace: cal-py
+spec:
+  selector:
+    app: cal
+  ports:
+  type: NodePort
+  ports:
+   -  port: 80
+      targetPort: 8080
+    #  nodePort: 30010
+
