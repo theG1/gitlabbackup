@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: mario-test
+  name: mario
   namespace: mario
 spec:
   selector:
-    app: mario-test
+    app: mario
   ports:
   type: NodePort
   ports:
