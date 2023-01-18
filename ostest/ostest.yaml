@@ -6,7 +6,7 @@ metadata:
     app: ostest
   namespace: ostest
 spec:
-  replicas: 5
+  replicas: 3
   selector:
     matchLabels:
       app: ostest
@@ -25,8 +25,8 @@ spec:
 #          value: /cert/tls.key
 #      nodeSelector:
 #        nodegroup-type: "managed-frontend-workloads"
-      imagePullSecrets:
-      - name: cyj
+#      imagePullSecrets:
+#      - name: cyj
 ---
 apiVersion: v1
 kind: Service
